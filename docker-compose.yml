@@ -1,0 +1,40 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: recsys
+      POSTGRES_PASSWORD: recsys123
+      POSTGRES_DB: retail_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+
+  api:
+    build: .
+    environment:
+      DATABASE_URL: postgresql+psycopg2://recsys:recsys123@postgres:5432/retail_db
+      INSTACART_RAW_DIR: /app/instacart_raw
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    volumes:
+      - ./data:/app/data
+      - ./outputs:/app/outputs
+      - ../retail-demand-recsys/data/raw:/app/instacart_raw:ro
+
+  dashboard:
+    build: .
+    command: streamlit run app.py --server.address 0.0.0.0 --server.port 8501
+    ports:
+      - "8501:8501"
+    depends_on:
+      - api
+    volumes:
+      - ./data:/app/data
+      - ./outputs:/app/outputs
+
+volumes:
+  postgres_data:

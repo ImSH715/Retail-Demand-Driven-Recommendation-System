@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 
 ROOT = Path(__file__).parent
 
@@ -9,6 +10,7 @@ PROCESSED_DIR = DATA_DIR / "processed"
 OUTPUT_DIR = ROOT / "outputs"
 MODEL_DIR = OUTPUT_DIR / "models"
 FIGURE_DIR = OUTPUT_DIR / "figures"
+RESULT_DIR = OUTPUT_DIR / "results"
 
 TRAIN_FILE = RAW_DIR / "train.csv"
 TEST_FILE = RAW_DIR / "test.csv"
@@ -29,3 +31,6 @@ RANDOM_STATE = 42
 TEST_SIZE = 0.2
 
 KAGGLE_DATASET = "demand-forecasting-kernels-2020"
+
+# The Instacart files are kept in the original sibling project directory.
+INSTACART_RAW_DIR = Path(os.getenv("INSTACART_RAW_DIR", str(ROOT.parent / "retail-demand-recsys" / "data" / "raw")))

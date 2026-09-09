@@ -1,0 +1,5 @@
+__pycache__
+.git
+data/processed
+outputs/figures
+*.ipynb_checkpoints

@@ -1,0 +1,6 @@
+{
+  "users_evaluated": 1000,
+  "precision_at_k": 0.2642,
+  "recall_at_k": 0.3333709885430823,
+  "k": 10
+}

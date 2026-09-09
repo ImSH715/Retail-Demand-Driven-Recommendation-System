@@ -1,0 +1,12 @@
+{
+  "ncf": {
+    "samples": 300000,
+    "positive_rate": 0.5,
+    "training_auc_proxy": 0.7778666666666667
+  },
+  "two_tower": {
+    "samples": 300000,
+    "positive_rate": 0.5,
+    "training_auc_proxy": 0.65782
+  }
+}
